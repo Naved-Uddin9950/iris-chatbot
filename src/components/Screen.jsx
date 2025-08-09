@@ -1,13 +1,12 @@
-// Screen.jsx
-import React from 'react';
-import { Input, Response } from '../components';
-import useChat from '../contexts/ChatContext';
+import React from "react";
+import { Input, Response } from "../components";
+import useChat from "../contexts/ChatContext";
 
-function Screen() {
+const Screen = () => {
   const { chats } = useChat();
 
   return (
-    <div className='overflow-y-scroll h-96'>
+    <div className="overflow-y-scroll h-[calc(100vh-2.5rem)] p-4">
       {chats.map((chat) => (
         <div key={chat.id}>
           <Input userMsg={chat.user} />
@@ -16,6 +15,6 @@ function Screen() {
       ))}
     </div>
   );
-}
+};
 
 export default Screen;
