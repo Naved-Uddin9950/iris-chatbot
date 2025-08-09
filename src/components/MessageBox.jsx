@@ -1,12 +1,11 @@
 // MessageBox.jsx
 import React, { useEffect, useRef } from "react";
 import useChat from "../contexts/ChatContext";
-import data from "../data/dataset.json";
 import axios from "axios";
 import { storage } from "../utils/storage";
 
 function MessageBox() {
-  const { chats, setChats } = useChat();
+  const { chats, setChats, setLoading } = useChat();
   const msgRef = useRef();
 
   const sendMsg = async () => {
@@ -15,6 +14,7 @@ function MessageBox() {
     if (message?.trim() === "") return;
 
     msgRef.current.value = "";
+    setLoading(true);
 
     try {
       const payload = {
@@ -76,6 +76,8 @@ function MessageBox() {
           date: new Date().toLocaleString(),
         },
       ]);
+    } finally {
+      setLoading(false);
     }
   };
 

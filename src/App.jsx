@@ -10,6 +10,7 @@ function App() {
   const oldChats = storage.get("chats") || [];
 
   const [chats, setChats] = React.useState(oldChats);
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     const uniqueChats = chats.filter(
@@ -23,7 +24,7 @@ function App() {
 
   return (
     <div className="w-full min-h-screen flex" id="screen">
-      <ChatProvider value={{ chats, setChats }}>
+      <ChatProvider value={{ chats, setChats, loading, setLoading }}>
         <Sidebar />
         <div className="flex-1 h-screen">
           <Screen />

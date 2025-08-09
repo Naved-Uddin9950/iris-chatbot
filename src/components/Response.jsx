@@ -4,10 +4,12 @@ import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-const Response = ({ BotMsg }) => {
+const Response = ({ BotMsg, styles = { message: "" } }) => {
   return (
     <div className="flex justify-start mb-2">
-      <div className="bg-gray-800 text-gray-300 rounded-lg py-2 px-4 max-w-prose break-words">
+      <div
+        className={`bg-gray-800 text-gray-300 rounded-lg py-2 px-4 max-w-prose break-words ${styles.message}`}
+      >
         <ReactMarkdown
           children={BotMsg}
           remarkPlugins={[remarkGfm]}

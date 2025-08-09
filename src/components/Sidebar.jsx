@@ -31,6 +31,13 @@ const Sidebar = () => {
     setFilteredChats(results || chats || []);
   };
 
+  React.useEffect(() => {
+    if (document.getElementById("historySearchBar")?.value?.trim() !== "")
+      return;
+
+    setFilteredChats(chats);
+  }, [chats]);
+
   return (
     <div className="bg-gray-900 text-white overflow-y-auto overlflow-x-hidden shadow-md w-64 p-4 h-screen relative scrollbar-thin">
       <input
