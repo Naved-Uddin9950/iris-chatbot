@@ -3,15 +3,23 @@ import "./App.css";
 import { Screen, MessageBox } from "./components";
 import Sidebar from "./components/Sidebar";
 import { ChatProvider } from "./contexts/ChatContext";
-import { useState } from "react";
+import React from "react";
 import { storage } from "./utils/storage";
 
 function App() {
-  const oldChats = storage.get("chats") || [
-    { id: 0, user: "hi", bot: "Hello, how can I help you sir ?" },
-  ];
+  const oldChats = storage.get("chats") || [];
 
-  const [chats, setChats] = useState(oldChats);
+  const [chats, setChats] = React.useState(oldChats);
+
+  React.useEffect(() => {
+    const uniqueChats = chats.filter(
+      (chat, index, self) => index === self.findIndex((c) => c.id === chat.id)
+    );
+
+    if (uniqueChats.length !== chats.length) {
+      setChats(uniqueChats);
+    }
+  }, [chats]);
 
   return (
     <div className="w-full min-h-screen flex" id="screen">
